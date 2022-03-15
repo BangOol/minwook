@@ -46,12 +46,12 @@ public class TodayExample {
 		
 		
 			
-		if((BMI + 5) > kg && (BMI -5) <= kg) {
-			System.out.println("현재  정상 체중입니다.");
-		} else{
-			System.out.println("현재  정상 체중이 아닙니다. 체중을 " + (kg - BMI) + "kg 빼셔야 합니다.");
-		
-		}
+//		if((BMI + 5) > kg && (BMI -5) <= kg) {
+//			System.out.println("현재  정상 체중입니다.");
+//		} else{
+//			System.out.println("현재  정상 체중이 아닙니다. 체중을 " + (kg - BMI) + "kg 빼셔야 합니다.");
+//		
+//		}
 	
 	}
 }
