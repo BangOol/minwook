@@ -19,7 +19,7 @@ public class FriendExample {
 		f2.email = "qlkn21233@gmail.com";
 		f2.height = 173.8;
 		f2.weight = 86.2;
-		
+		 
 		Friend f3 =new Friend();
 		
 		f3.friendName = "동동동";

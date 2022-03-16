@@ -24,7 +24,7 @@ public class MemberExample {
 		st1.name = "김영희";
 		st1.korScore = 97;
 		st1.engScore = 86;
-		
+		  
 		Student st2 = new Student();
 		
 	}

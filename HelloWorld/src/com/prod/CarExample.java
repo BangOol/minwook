@@ -13,6 +13,6 @@ public class CarExample {
 		sonata.addSpeed();
 		sonata.minusSpeed();
 		System.out.println("현재 속도: " + sonata.getSpeed() + "km입니다.");
-		      
+		       
 	}
 }

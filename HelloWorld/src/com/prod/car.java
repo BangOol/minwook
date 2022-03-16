@@ -15,11 +15,11 @@ public class car {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-
+ 
 	public void setMaxSpeed(int maxSpeed) {
 		this.maxSpeed = maxSpeed;
 	}
-	
+	 
 	// source - generate getters and setters :set, get 생성
 
 	public void addSpeed() {

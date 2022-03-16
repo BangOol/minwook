@@ -17,7 +17,7 @@ public class EmployeeExample {
 		
 		e1.setEmployeejob("월급계산");
 		
-		
+		 
 		System.out.println(e1.getEmpInfo());
 		
 		

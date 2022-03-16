@@ -9,7 +9,7 @@ public class CalculatorExample {
 		int number1 = 10;
 		int number2 = 20;
 		double r = 4.5;
-		
+		 
 		// 클래스를 호출하는 부분
 //		h1.add(number1, number2);
 		int result = h1.add(number1, number2);

@@ -22,7 +22,7 @@ public class Student {
 	int getKorScore(){
 		return korScore;
 	}
-	
+	  
 	int getEngScore() {
 		return engScore;
 		// int같은 클래스와 달리, void 계열은 return 값이 없어서, studentExample 에서 String v1 = s1.study() 같은 방식이 불가능하다. 

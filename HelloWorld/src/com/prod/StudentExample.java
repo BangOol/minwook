@@ -14,7 +14,7 @@ public class StudentExample {
 		
 		int v1 = s1.getKorScore();
 		System.out.println(v1);
-		
+		 
 		int v2 = s1.getEngScore();
 		System.out.println(v2);
 	}
