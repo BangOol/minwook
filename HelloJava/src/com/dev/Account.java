@@ -14,7 +14,6 @@ public class Account {
 	// 생성자를 통해 미리 그 형태를 지정함으로써 많은 양의 정보를 적은 줄로 해결할 수 있다는거 아닐가
 	
 	public Account(String accNo, String accName, int money) { //계좌번호, 예금주, 통장금액
-		super();
 		this.accNo = accNo;
 		this.accName = accName;
 		this.money = money;
