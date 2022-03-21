@@ -113,7 +113,7 @@ public class ExampleBankApp {
 			if (depositCnt == 1) {
 				System.out.println("정상적으로 입금되었습니다.");
 				trade = MoneyBox + depositMoney;
-				temporaryMoneyBox.setBankMoney(trade);
+				banks[i].setBankMoney(trade);
 				System.out.println("현재 잔액은 " + trade + "원 입니다.");
 				break;
 			} else if(depositCnt == 2) {

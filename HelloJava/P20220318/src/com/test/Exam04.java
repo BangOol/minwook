@@ -5,10 +5,20 @@ package com.test;
 public class Exam04 {
 	public static void main(String[] args) {
 
-		int num =(int)(Math.random() * 5) + 1 ; 
 		int[] Ary = new int[5];
+		int number = 0;
 		
+		for(int i = 0; i < Ary.length; i++) {
+			Ary[i] =(int)(Math.random() * 6) + 1 ; 
+		}
 		
+		int temp = intAry[0];
+		
+		for(int i = 0; i <Ary.length; i++) {
+			if(intAry[i] < temp) {
+				temp = intAry[i];
+			}
+		}
 		
 	}
 }
