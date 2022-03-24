@@ -56,7 +56,7 @@ public class Student { // 라이브러리용으로 사용할 것임.
 
 	@Override
 	public String toString() {
-		return "학생정보: " + studentName + "학생번호: " + studentNumber + "영어점수: " + EngScore + "극어점수: " + KorScore;
+		return " 학생정보: " + studentName + " 학생번호: " + studentNumber + " 영어점수: " + EngScore + " 극어점수: " + KorScore;
 	}
 
 }

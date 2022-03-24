@@ -10,7 +10,7 @@ public class SetExample {
 		set.add("hello");
 		set.add("world");
 		set.add("good");
-		set.add("world"); // 중복된 값을 넣는다고 해서 오류가 나는 것은 아니고, 중복된 요소는 추가불가라는 것만 기억하면 될듯.
+		set.add("world"); // 중복된 값을 넣는다고 해서 오류가 나는 것은 아니고, 중복된 요소는 추가불가라는 것만 기억하면 될듯. 없는 처리가 된다 
 		
 		set.remove("good");
 		System.out.println("set 크기: " + set.size()); //set도 size를 이용함. ++ 얘는 인덱스값이 없고
