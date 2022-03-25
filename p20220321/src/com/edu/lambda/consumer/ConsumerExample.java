@@ -29,7 +29,7 @@ public class ConsumerExample {
 //		public void accept(Integer t, Integer u) {
 //			System.out.println("result =>  " + (t+u));
 //			
-//		}
+		};
 			
 	}
 
