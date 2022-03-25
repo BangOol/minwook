@@ -19,7 +19,7 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 	}
 
 	// 멤버 클래스로 선언함
-	class StudentServiceImpl implements StudentService {
+	class StudentServiceFile implements StudentService {
 
 		@Override
 		public void insertStudent(Student student) {
@@ -40,6 +40,10 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 		@Override
 		public List<Student> studentList() { // 전체 학생 정보 불러오기
 			return list;
+		}
+		
+		public void saveToFile() {
+			System.exit(0);
 		}
 
 		@Override
@@ -83,7 +87,7 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 		while (true) {
 			System.out.println("추가:1 리스트:2 한건조희:3 수정:4 삭제:5 이름조회:6 종료:9");
 			System.out.println("선택하세요.");
-			StudentService service = new StudentServiceImpl(); // 이 부분에 대해서 잘 알아보자.
+			StudentService service = new StudentServiceFile(); // 이 부분에 대해서 잘 알아보자.
 			// 인터페이스를 구현하는 변수 이름으로 선언하고, 변수에 할당될 수 있어서 new -- 로 파일에 저장이 가능하다?
 
 			int menu = scn.nextInt();
@@ -140,7 +144,8 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 			}
 			
 			else if (menu == 9) {
-				System.out.println("프로그램을 종료합니다."); // 종료를 하고 나면 메모리 속 내용이 사라지게 된다.
+				System.out.println("프로그램을 종료합니다."); // 종료를1 하고 나면 메모리 속 내용이 사라지게 된다.
+				service.saveToFile();
 				break; // 나중에 DB를 사용하여 저장할 수 있게 된다.
 			}
 

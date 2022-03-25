@@ -12,37 +12,7 @@ public class MemberApp {
 	class memberServiceImpl implements MemberService {
 
 		public void addMember(Member member) {
-			try {
-				System.out.println("학생번호를 입력하세요");
-				int memberId = scn.nextInt();
-				System.out.println("학생이름을 입력하세요");
-				String memberName = scn.next();
-				System.out.println("전화번호를 입력하세요");
-				String memberPhone = scn.next();
-				System.out.println("어느 반입니까?");
-				System.out.println("축구반, 수영반, 도서반이 있습니다.");
-				String select = scn.next();
-				System.out.println("등급을 입력하세요");
-				String Grade = scn.next();
-				
-				if (select.equals("축구반")) {
-					SoccerMember classMember = new SoccerMember(memberId, memberName, memberPhone, "호갈두", Grade);
-					members.add(classMember);
-				} else if (select.equals("수영반")) {
-					SwimMember classMember = new SwimMember(memberId, memberName, memberPhone, "홍길동", Grade);
-					members.add(classMember);
-				} else if (select.equals("도서반")) {
-					BookMember classMember = new BookMember(memberId, memberName, memberPhone, "호길동", Grade);
-					members.add(classMember);
-				} else {
-					System.out.println("다시 입력해주세요");
-					
-				}
-				
-			} catch (InputMismatchException e) {
-				e.printStackTrace();
-			}
-			
+			members.add(member);
 
 		}
 
@@ -79,8 +49,41 @@ public class MemberApp {
 			int menu = scn.nextInt();
 
 			if (menu == 1) {
-				Member member = new Member();
-				service.addMember(member);
+				
+				try {
+					System.out.println("학생번호를 입력하세요");
+					int memberId = scn.nextInt();
+					System.out.println("학생이름을 입력하세요");
+					String memberName = scn.next();
+					System.out.println("전화번호를 입력하세요");
+					String memberPhone = scn.next();
+					System.out.println("등급을 입력하세요");
+					String Grade = scn.next();
+					System.out.println("어느 반입니까?");
+					System.out.println("축구반, 수영반, 도서반이 있습니다.");
+					String select = scn.next();
+					
+					
+					if (select.equals("축구반")) {
+						SoccerMember classMember = new SoccerMember(memberId, memberName, memberPhone, "호갈두", Grade);
+						service.addMember(classMember);
+					} else if (select.equals("수영반")) {
+						SwimMember classMember = new SwimMember(memberId, memberName, memberPhone, "홍길동", Grade);
+						service.addMember(classMember);
+					} else if (select.equals("도서반")) {
+						BookMember classMember = new BookMember(memberId, memberName, memberPhone, "호길동", Grade);
+						service.addMember(classMember);
+					} else {
+						System.out.println("다시 입력해주세요");
+						
+					}
+					
+				} catch (InputMismatchException e) {
+					e.printStackTrace();
+				}
+				
+				
+				
 
 			} else if (menu == 2) {
 				service.modifyMember(null);

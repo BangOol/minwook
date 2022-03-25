@@ -11,5 +11,6 @@ public interface StudentService {
 	public List<Student> searchStudent(String name);
 	//StudentApp 에서 메인 기능
 	//기능만 정의되어있음.
+	public void saveToFile();
 	
 }
