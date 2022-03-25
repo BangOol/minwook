@@ -25,6 +25,17 @@ public class Member {
 		return phone;
 	}
 
+	public Member(int memberId, String memberName, String phone) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.phone = phone;
+	}
+
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
