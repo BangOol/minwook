@@ -1,9 +1,9 @@
 package com.edu;
 
 public class Member {
-	private int memberId;
-	private String memberName;
-	private String phone;
+	public int memberId;
+	public String memberName;
+	public String phone;
 
 	public int getMemberId() {
 		return memberId;
