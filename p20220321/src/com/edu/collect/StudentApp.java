@@ -1,5 +1,8 @@
 package com.edu.collect;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -79,6 +82,23 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 			}return null;
 		}
 
+		public void saveToFile() {
+			//작성했던 ArrayList<student> list -> 파일저장
+			try {
+				FileWriter fw = new FileWriter("studentList.data");
+				BufferedWriter bw = new BufferedWriter(fw);
+				
+				for(Student stud : list) {
+					bw.write(stud.getStudentNumber() + "," + stud.getStudentName()//
+					+ ", " + stud.getEngScore() + ", " + stud.getKorScore());
+				}
+				bw.close();
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		
 	}
 	// end of StudentServiceImpl
 

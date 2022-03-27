@@ -21,15 +21,21 @@ public class BookMember extends Member {
 		this.bookGrade = bookGrade;
 	}
 	
-	public BookMember(String bookName, String bookGrade) {
-		super();
-		this.bookName = bookName;
-		this.bookGrade = bookGrade;
+	@Override
+	public String toString() {
+		return "BookMember [bookName=" + bookName + ", bookGrade=" + bookGrade + ", toString()=" + super.toString()
+				+ "]";
 	}
-	public BookMember(int memberId, String memberName, String memberPhone, String string, String grade) {
+	public BookMember() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	public BookMember(int memberId, String memberName, String phone, String bookName ,String bookGrade ) {
+		super(memberId, memberName, phone);
+		this.bookGrade = bookGrade;
+		this.bookName = bookName;
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	
