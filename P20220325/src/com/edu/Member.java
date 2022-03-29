@@ -5,6 +5,17 @@ public class Member {
 	public String memberName;
 	public String phone;
 
+	public Member(int i) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Member(int memberId, String memberName, String phone) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.phone = phone;
+	}
+
 	public int getMemberId() {
 		return memberId;
 	}
@@ -23,17 +34,6 @@ public class Member {
 
 	public String getPhone() {
 		return phone;
-	}
-
-	public Member(int memberId, String memberName, String phone) {
-		super();
-		this.memberId = memberId;
-		this.memberName = memberName;
-		this.phone = phone;
-	}
-
-	public Member() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setPhone(String phone) {
