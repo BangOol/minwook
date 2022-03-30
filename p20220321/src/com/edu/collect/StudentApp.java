@@ -21,7 +21,7 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 
 		@Override
 		public void insertStudent(Student student) {
-			list.add(student); // 추가
+			// 추가
 
 		}
 
@@ -42,36 +42,16 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 
 		@Override
 		public void modifyStudent(Student student) { // 수정 : 기존 값에서 다른 값으로 변경 --> 같은 번호를찾아서 변경
-			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getStudentNumber() == student.getStudentNumber()) {
-					list.get(i).setEngScore(student.getEngScore());
-					list.get(i).setKorScore(student.getKorScore());
-				}
-			}
+
 		}
 
 		@Override
 		public void removeList(int number) {
 
-			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getStudentNumber() == number) {
-					list.remove(i);
-				}
-			}
-
 		}
 
 		@Override
 		public List<Student> searchStudent(String name) {
-			List<Student> searchList = new ArrayList<Student>(); // 찾았다고 종료해선 안된다.
-			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getStudentName().equals(name)) {
-					// 같은 이름이 이쓴지 찾아보고 있으면 searchList.add
-					searchList.add(list.get(i)); // 이름을 저장해야되기 때문에 list.get(i)를 이용해서 add를 한다?
-				}
-				return searchList; // add 안에 그 값을넣어야 하는데 곧바로 i값을 넣을 수 없으니,
-
-			}
 			return null;
 		}
 
@@ -83,11 +63,15 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 
 	public void execute() {
 		// 메인기능 담당하는 exucute()에서 StudentServiceFIle 사용?
-		StudentService service = new StudentServiceFile(); // 얘 while 문 안에 있으면 절대 안됨. 왜? 인식이 안되서 아무리 값 넣어도 증발함.
-		// while 구문에 있는동안 heap 영역에 값이 저장이 되서 그런건지, 입력, 리스트 메소드가 정상적으로 정상됨에도 불구하고 값이 날아감...? 인가?
+		StudentService service = null;
+		service = new StudentServiceOracle();
+
+		// 얘 while 문 안에 있으면 절대 안됨. 왜? 인식이 안되서 아무리 값 넣어도 증발함.
+		// while 구문에 있는동안 heap 영역에 값이 저장이 되서 그런건지, 입력, 리스트 메소드가 정상적으로 정상됨에도 불구하고 값이
+		// 날아감...? 인가?
 		// 이건 다시 봐야 될듯.
 		// 그냥 무조건 봐야 함. 제발. 제발. 보자. 복습해해애애애ㅐ애애
-		
+
 		while (true) {
 			System.out.println("추가:1 리스트:2 한건조회:3 수정:4 삭제:5 이름조회:6 종료:9");
 			System.out.println("선택하세요.");
@@ -99,17 +83,22 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 
 			if (menu == 1) {
 				// 학생 정보를 추가입력 : 학생번호, 이름, 영어,국어점수
+				Student stu = new Student();
+
 				System.out.println("학생번호를 입력하세요");
 				int stuNo = scn.nextInt();
+				stu.setStudentNumber(stuNo);
 				System.out.println("학생이름을 입력하세요");
 				String stuName = scn.next();
+				stu.setStudentName(stuName);
 				System.out.println("영어점수를 입력하세요");
 				int engScore = scn.nextInt();
+				stu.setEngScore(engScore);
 				System.out.println("국어점수를 입력하세요");
 				int korScore = scn.nextInt();
+				stu.setKorScore(korScore);
 
-				Student s1 = new Student(stuNo, stuName, engScore, korScore); // 규칙에 맞게 인스턴스를 만들겠다.
-				service.insertStudent(s1);
+				service.insertStudent(stu);
 
 			} else if (menu == 2) {
 				List<Student> list = service.studentList(); // 바깥에 같은 이름의 list가 있지만 재정의하는 것으로 보임. 아니면 서비스의 추상메소드 쓰는걸수도?
@@ -118,23 +107,27 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 				}
 
 			} else if (menu == 3) {
+				
+				System.out.println("조회하실 학생번호를 입력하세요");
+				int number = scn.nextInt();
+				service.getStudent(number);
+				
+
+			} else if (menu == 4) {
+				Student student = new Student();
+
 				System.out.println("학생번호를 입력하세요");
 				int number = scn.nextInt();
-				Student student = service.getStudent(number);
-				if (student == null) {
-					System.out.println("조회된 결과가 없습니다.");
-				} else {
-					System.out.println(student.toString());// Student의 toString
-				}
-			} else if (menu == 4) {
-				System.out.println("수정할 학생번호를 입력하세요");
-				int stuNo = scn.nextInt();
+				student.setStudentNumber(number);
 				System.out.println("수정할 영어점수를 입력하세요");
 				int engScore = scn.nextInt();
+				student.setEngScore(engScore);
 				System.out.println("수정할 국어점수를 입력하세요");
 				int korScore = scn.nextInt();
-				Student s1 = new Student(stuNo, null, engScore, korScore);
-				service.modifyStudent(s1);
+				student.setKorScore(korScore);
+
+				service.modifyStudent(student);
+
 			} else if (menu == 5) {
 				System.out.println("삭제할 학생번호를 입력하세요.");
 				int number = scn.nextInt();
@@ -143,10 +136,7 @@ public class StudentApp { // 실제 실행되는 클래스. studentexe는 실행
 			} else if (menu == 6) {
 				System.out.println("조회할 학생이름을 입력하세요.");
 				String name = scn.next();
-				List<Student> list = service.searchStudent(name);
-				for (Student i : list) {
-					System.out.println(i.toString());
-				}
+				service.searchStudent(name);
 
 			}
 

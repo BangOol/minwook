@@ -43,19 +43,7 @@ public class StudentServiceFile implements StudentService {
 
 	public void saveToFile() {
 		// 작성했던 ArrayList<student> list -> 파일저장
-		try {
-			FileWriter fw = new FileWriter("studentList.data");
-			BufferedWriter bw = new BufferedWriter(fw); // 보조스트림의 생성자의 매개값으로, 기본스트림 사용하면 된다.
-
-			for (Student stud : list) {
-				bw.write(stud.getStudentNumber() + "," + stud.getStudentName()//
-						+ "," + stud.getEngScore() + "," + stud.getKorScore() + "\n");
-			}
-			bw.close();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 
 	}
 
@@ -66,11 +54,6 @@ public class StudentServiceFile implements StudentService {
 
 	@Override
 	public Student getStudent(int studentNumber) {
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getStudentNumber() == studentNumber) {
-				return list.get(i);
-			}
-		}
 		return null;
 	}
 

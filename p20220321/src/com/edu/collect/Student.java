@@ -8,7 +8,7 @@ public class Student implements Serializable { // 라이브러리용으로 사�
 	// getter, setter 생성
 	//
 
-	private int studentNumber;
+	private int studentnumber;
 	private String studentName;
 	private int EngScore;
 	private int KorScore;
@@ -17,19 +17,19 @@ public class Student implements Serializable { // 라이브러리용으로 사�
 
 	}
 
-	public Student(int studentNumber, String studentName, int engScore, int korScore) {
-		this.studentNumber = studentNumber;
+	public Student(int studentnumber, String studentName, int engScore, int korScore) {
+		this.studentnumber = studentnumber;
 		this.studentName = studentName;
 		this.EngScore = engScore;
 		this.KorScore = korScore;
 	}
 
 	public int getStudentNumber() {
-		return studentNumber;
+		return studentnumber;
 	}
 
-	public void setStudentNumber(int studentNumber) {
-		this.studentNumber = studentNumber;
+	public void setStudentNumber(int studentnumber) {
+		this.studentnumber = studentnumber;
 	}
 
 	public String getStudentName() {
@@ -58,7 +58,7 @@ public class Student implements Serializable { // 라이브러리용으로 사�
 
 	@Override
 	public String toString() {
-		return " 학생정보: " + studentName + " 학생번호: " + studentNumber + " 영어점수: " + EngScore + " 극어점수: " + KorScore;
+		return " 학생정보: " + studentName + " 학생번호: " + studentnumber + " 영어점수: " + EngScore + " 극어점수: " + KorScore;
 	}
 
 }
