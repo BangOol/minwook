@@ -11,7 +11,9 @@ public interface CommunityService {
 
 	public void remove(Community com); // 아이디, 비밀번호 입력 후 삭제
 	
-	public void logIn(Community com); 
+	public int logIn(Community com); 
 	
 	public void makeAccount(Community com);
+	
+	public int checkAccount(Community com);
 }

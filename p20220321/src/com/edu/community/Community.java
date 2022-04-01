@@ -62,8 +62,8 @@ public class Community implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Community [CommunityName=" + CommunityName 
-				+ ", CommunityCount=" + CommunityCount
+		return "Community [CommunityCount=" + CommunityCount 
+				+ ", CommunityName=" + CommunityName
 				+ ", CommunityTime=" + CommunityTime + "]";
 	}
 	
