@@ -45,6 +45,8 @@ public class CommunityOracle extends DAO implements CommunityService {
 		List<Community> community = service.totalList();
 		int b = community.size();
 		System.out.println(b);
+		// null 값으로 처리하고, 번호만 남겨놓으면 어떨까?
+		
 
 		// 자바 - sql 간 시간 연동이 안되서 추가 코드를 써야 함.
 		conn = getConnect();
@@ -55,16 +57,6 @@ public class CommunityOracle extends DAO implements CommunityService {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-
-			for (int i = 0; i < b; i++) {
-				if (community.get(i) != null) {
-					
-				} else {
-					b = i;
-					return;
-				}
-				//정상적인 값을 넣었을 때는 카운트가 됨.
-			}
 
 			psmt.setInt(1, b); // 적용됨
 			psmt.setString(2, com.getCommunityId());
@@ -84,19 +76,64 @@ public class CommunityOracle extends DAO implements CommunityService {
 	}
 
 	@Override
-	public Community modify(Community com) {
-		return null;
+	public void modify(Community com) {
+		//연결
+		conn = getConnect();
+		
+		// 그대로 하면, 인증받은 로그인과 비밀번호에 속해있는 모든 게시글의 내용이 변경된다.
+		// 그렇기에 일단 아이디에 해당되는 게시글 번호, 제목을 보여주고
+		// 그 중 변경하고자 하는 게시글 번호를 입력하였을 때, 수정이 되도록 해야 함.
+		// 그렇다면 추가적인 메서드를 통해 내가 쓴 글을 볼 수 있는 메소드를 만들어야 한다.
+		String sql = "update community_info "
+				+ " set  community_name = ?, community_contents = ? "
+				+ "    where community_id = ? , community_password = ?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, com.getCommunityName());
+			psmt.setString(2, com.getCommunityContents());
+			psmt.setString(3, com.getCommunityId());
+			psmt.setString(4, com.getCommunityPassword());
+			
+			rs = psmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public void remove(Community com) {
+		// null 값으로 처리하고, 번호만 남겨놓으면 어떨까?
+		// 나중에 null 값인 친구들 다 제거하고 자동 재배열이 되는게 나을까?
+		// 그러면 나중에 100만개씩 쌓였을 떄, 일일이 다 처리하는게 힘들지 않을까?
+		// 테이블을 좀 더 잘 다루면, 회원정보에 대한 테이블을 만들고 연동시켜서, 편리하게 할 수 있을텐데.
+		CommunityService service = new CommunityOracle();
+		List<Community> community = service.totalList();
+		// 밖에서 로그인 개념으로 아이디, 비밀번호를 체크하고, 매개변수는 없이 진행할 수 있을 듯.
 		// 연결
+		// 로그인 메소드를 사용하면서 번호 값을 받아놓으면 되지 않을까?
 		conn = getConnect();
+		
 		// 쿼리문 작성: 아이디와 비밀번호가 존재할 때, 게시글을 삭제할 수 있도록. 단, 첫 번째 게시물은 삭제하지 못하도록. 그건 회원탈퇴에서
 		// 써야함.
 		// 삭제하고 사라진 게시글에 맞추어서 count도 줄어들텐데, 그러면 값이 충돌해서 primary key가 겹칠 수 있지 않을까?
-		String sql = "";
+		String sql = "update community_info "
+				+ "set community_id = 'null', community_password = 'null', "
+				+ "    community_name = 'null', community_contents = 'null' "
+				+ "    where community_count = ? ";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, com.getCommunityId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
+	
 
 	public int logIn(Community com) {
 		// 연결
@@ -128,6 +165,7 @@ public class CommunityOracle extends DAO implements CommunityService {
 		CommunityService service = new CommunityOracle();
 		List<Community> community = service.totalList();
 		int b = community.size();
+	
 
 		conn = getConnect();
 
@@ -191,4 +229,54 @@ public class CommunityOracle extends DAO implements CommunityService {
 		}
 		return r;
 	}
+	
+	public List<Community> myCommunityList(Community com) {
+		List<Community> community = new ArrayList<Community>(); 
+		//연결
+		conn = getConnect();
+		//쿼리문 작성
+		String sql = "SELECT * " + "FROM community_info " + "WHERE community_id = ? and community_password =?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, com.getCommunityId());
+			psmt.setString(2, com.getCommunityPassword());
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				Community comcom = new Community();
+				comcom.setCommunityId(rs.getString("community_id"));
+				
+				community.add(comcom);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return community;
+		
+		
+
+	}
+	
 }
+
+// 1. 전체 게시글 출력
+// 1-1. 게시글 출력 화면 깔끔하게 만들기 -java
+// 1-2. 게시글 출력 화면 중 아이디와 비밀번호가 null값인 게시글 제외 출력 -java
+// 1-3. 게시글 당일에는 시간까지 출력, 하루가 지나면 년월일만 뜨도록 하도록 만들기. -sql
+
+// 2. 게시글 작성
+// 2-1. 게시글 작성 중, 엔터를 부득이하게 치는 부분 개선 - java
+// 2-2. 게시글 작성 중, primary key인 게시글 번호 대체제 찾기 -sql
+
+// 3. 게시글 수정
+// 3-1. logIn, checkAccount method를 통해 확인 후, update 쿼리문을 통해 제목과 내용 수정 -sql
+
+// 4. 게시글 삭제
+// 4-1. 일단 null값으로 처리하긴 했지만, 게시글 작성 시 게시글 번호 사이 빈 부분을 찾아서 넣을 수 있다면 -sql
+// 4-2. delete 를 사용하여 지정한 아이디와 비밀번호가 포함된 글 전체를 삭제할 수 있또록 작성.
+
+
+// 5. 로그인
+// 5-1. 로그인 시 닉네임을 설정하도록 하고, 이것을 primary key로 잡아버리자.
+// 5-2. 그래서 게시글 번호를 if문을 사용하여 겹치는 일이 없게끔 하는거지.

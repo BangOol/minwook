@@ -12,7 +12,6 @@ public class StudentServiceOracle extends DAO implements StudentService {
 	public void insertStudent(Student student) {
 		// 연결
 		conn = getConnect();
-		Student stu = new Student();
 		// 쿼리 구문 작성
 		String sql = "insert into student_info(student_number, student_name, eng_score, kor_score)\r\n"
 				+ "values(?, ?, ?, ?)";
@@ -39,12 +38,12 @@ public class StudentServiceOracle extends DAO implements StudentService {
 	@Override
 	public Student getStudent(int studentNumber) {
 		//연결
-		getConnect();
+		conn = getConnect();
 		Student stu = new Student();
 		//쿼리문 작성
 		String sql = "SELECT * FROM student_info WHERE student_number = ?";
-		
-		//실행 준비
+			
+			//실행 준비
 		try {
 			psmt = conn.prepareStatement(sql);
 			
