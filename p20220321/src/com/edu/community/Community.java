@@ -68,7 +68,9 @@ public class Community implements Serializable{
 	}
 	
 	public String checkList() {
-		return "[번호 = " + CommunityCount + " ]";
+		return "[번호 = " + CommunityCount 
+				+ ", 제목 =" + CommunityName
+				+ "]";
 		
 	}
 	
