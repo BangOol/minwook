@@ -161,7 +161,7 @@ public class CommunityOracle extends DAO implements CommunityService {
 
 		String sql = "insert into community_info(community_count, community_id, community_password, "
 				+ "community_name, community_contents, community_time) "
-				+ "values((SELECT MAX(community_count)+1 FROM community_info), ?, ?, '가입을 축하드립니다!', '가입을 축하드립니다. 아마도?', default)";
+				+ "values((SELECT MAX(community_count)+1 FROM community_info), ?, ?, '가입을 축하드립니다!', '가입을 축하드립니다. 아마도?', (TO_CHAR(sysdate, 'yyyy-mm-dd hh24:mi:ss')))";
 
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -275,16 +275,25 @@ public class CommunityOracle extends DAO implements CommunityService {
 	
 }
 
+// 0. 메뉴 정렬
+
 // 1. 전체 게시글 출력
-// 1-1. 게시글 출력 화면 깔끔하게 만들기 -java
-// 1-3. 게시글 당일에는 시간까지 출력, 하루가 지나면 년월일만 뜨도록  만들기. -sql
+// 1-1. 게시글 출력 화면 정렬
+// 1-2. 게시글 당일에는 시간까지 출력, 하루가 지나면 년 월 일만 뜨도록 설정
 
 // 2. 게시글 작성
-// 2-3. 게시글 번호
+// 2-1. 댓글 달기
+// 2-1-1. 메뉴 출력
+// 2-1-2. 로그인
+// 2-1-3. 댓글
+// 2-1-4. 조회수
 
 // 3. 게시글 수정
 
 // 4. 게시글 삭제
-// 4-2. delete 를 사용하여 지정한 아이디와 비밀번호가 포함된 글 전체를 삭제할 수 있또록 작성.
 
+// 5. 회원가입
 
+// 6. 회원탈퇴
+
+// 7. 내 글 확인

@@ -63,13 +63,13 @@ public class Community implements Serializable{
 	@Override
 	public String toString() {
 		return "게시판 [번호 =" + CommunityCount 
-				+ ", 제목 =" + CommunityName
-				+ ", 작성시간 =" + CommunityTime + "]";
+				+ " 제목 =" + CommunityName
+				+ " 작성시간 =" + CommunityTime + "]";
 	}
 	
 	public String checkList() {
 		return "[번호 = " + CommunityCount 
-				+ ", 제목 =" + CommunityName
+				+ " 제목 =" + CommunityName
 				+ "]";
 		
 	}
