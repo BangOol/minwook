@@ -21,6 +21,25 @@ public interface CommunityService {
 	
 	public void removeList(Community com); // 리스트 삭제
 	
-	// 비밀번호 바꾸기 메서드
+	public Community seeTheList(int i); // 리스트 내용 확인
+	
+	public void changePassword(Community com);// 비밀번호 변경
+	
+	public Community changePW(Community com);
+	
+// ==============================================
+	
+	
+	public int logInAdmin(Community com); // 관리자 로그인
+	
+	public void removeListAdmin(Community com); // 관리자 권한 글 삭제
+	
+	public void modifyAdmin(Community com); // 관리자 권한 글 수정
+	
+	public List<Community> searchAccount(); // 관리자 권한 계정 찾기
+	
+	
+	
+
 	
 }

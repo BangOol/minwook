@@ -74,5 +74,18 @@ public class Community implements Serializable{
 		
 	}
 	
+	public String seeList() {
+		return "제목: " + CommunityName + "\r\n" 
+				+"시간: " + CommunityTime + "\r\n"
+				+"내용: " + CommunityContents; 
+	
+	}
+	
+	public String AccountList() {
+		return "[아이디 = " + CommunityId 
+				+ " 비밀번호 =" + CommunityPassword
+				+ "]";
+		
+	}
 	
 }
