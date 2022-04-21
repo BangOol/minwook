@@ -12,12 +12,20 @@ public class CommunityApp {
 
 	public void execute() { // admin, admin
 		CommunityService service = new CommunityOracle();
+		CommunityServiceAdmin serviceAdmin = new CommunityOracle();
+		CommunityAccountControl serviceAccount = new CommunityOracle();
 
 		while (true) {
 
 			System.out.println("1. 로그인 2. 회원가입 3.회원탈퇴 4.메뉴 종료");
-			int mm = scn.nextInt();
-
+			int mm;
+			try {
+			mm = scn.nextInt();
+			} catch(InputMismatchException e) {
+				System.out.println("잘못 입력하셨습니다...");
+				scn.nextLine();
+				continue;
+			}
 			if (mm == 1) {
 				Community comm = new Community();
 				List<Community> checkList = service.myCommunityList(comm);
@@ -30,7 +38,7 @@ public class CommunityApp {
 				String loginPassword = scn.next();
 				comm.setCommunityPassword(loginPassword);
 
-				int rr = service.logIn(comm);
+				int rr = serviceAccount.logIn(comm);
 				if (rr != 0) {
 					System.out.println("로그인되었습니다.");
 
@@ -131,7 +139,7 @@ public class CommunityApp {
 							System.out.println("본인 확인을 위해 아이디를 확인하겠습니다.");
 							String id = scn.next();
 							comm.setCommunityId(id);
-							Community chCom = service.changePW(comm);
+							Community chCom = serviceAccount.changePW(comm);
 							
 							System.out.println("바꾸시고 싶은 비밀번호를 입력하세요");
 							String pw1 = scn.next();
@@ -140,7 +148,7 @@ public class CommunityApp {
 							
 							if(pw1.equals(pw2)) {
 								chCom.setCommunityPassword(pw1);
-								service.changePassword(chCom);
+								serviceAccount.changePassword(chCom);
 							} else {
 								System.out.println("잘못 입력하셨습니다.");
 								continue;
@@ -169,10 +177,11 @@ public class CommunityApp {
 				String password = scn.next();
 				com.setCommunityPassword(password);
 
-				int m = service.checkAccount(com);
+				int m = serviceAccount.checkAccount(com);
 				if (m != 0) {
-					service.makeAccount(com);
+					serviceAccount.makeAccount(com);
 				} else {
+					System.out.println("중복되는 아이디가 존재합니다.");
 					continue;
 				}
 			} else if (mm == 3) { // 회원탈퇴
@@ -185,14 +194,14 @@ public class CommunityApp {
 				String password = scn.next();
 				com.setCommunityPassword(password);
 
-				int r = service.logIn(com);
+				int r = serviceAccount.logIn(com);
 				if (r != 0) {
 					System.out.println("확인되었습니다.");
 				} else if (r == 0) {
 					System.out.println("잘못 입력하셨습니다.");
 					continue;
 				}
-				service.removeAccount(com);
+				serviceAccount.removeAccount(com);
 
 			}else if (mm == 4) {
 				System.out.println("메뉴를 종료합니다.");
@@ -212,7 +221,7 @@ public class CommunityApp {
 				String loginPassword = scn.next();
 				comm.setCommunityPassword(loginPassword);
 
-				int rr = service.logInAdmin(comm);
+				int rr = serviceAdmin.logInAdmin(comm);
 				if (rr != 0) {
 					System.out.println("로그인되었습니다.");
 					
@@ -228,21 +237,17 @@ public class CommunityApp {
 							for (Community i : community) {
 								System.out.println(i.toString());
 							}
-							System.out.println("리스트 내용을 확인하시겠습니까? (Y/N)");
-							String YN = scn.next();
 							
-							if(YN.equals("Y")) {
 								System.out.println("보고 싶은 제목의 번호를 입력하세요.");
+								try {
 								int mini = scn.nextInt();
+								scn.nextLine();
 								comm = service.seeTheList(mini);
-								System.out.println(comm.seeList());
-							} else if(YN.equals("N")) {
-								System.out.println("메뉴로 돌아갑니다.");
-								continue;
-							} else {
-								System.out.println("잘못 입력하셨습니다.");
-								continue;
-							}
+								} catch(InputMismatchException e) {
+									System.out.println("잘못 입력하셨습니다.");
+									continue;
+								}
+							
 						} else if(Amenu == 2) { // 관리자 글 작성
 							scn.nextLine();
 							System.out.println("제목을 입력해주세요.");
@@ -268,7 +273,7 @@ public class CommunityApp {
 							System.out.println("내용을 수정해주세요.");
 							String contents = scn.nextLine();
 							comm.setCommunityContents(contents);
-							service.modifyAdmin(comm);
+							serviceAdmin.modifyAdmin(comm);
 							} catch(InputMismatchException e) {
 								e.printStackTrace();
 								System.out.println("잘못 입력하셨습니다. 메뉴로 돌아갑니다.");
@@ -291,10 +296,10 @@ public class CommunityApp {
 							int number = scn.nextInt();
 							comm.setCommunityCount(number);
 							
-							service.removeListAdmin(comm);
+							serviceAdmin.removeListAdmin(comm);
 							
 						} else if(Amenu == 5) { //관리자 권한 유저 계정 파악
-							List<Community> community = service.searchAccount();
+							List<Community> community = serviceAdmin.searchAccount();
 
 							for (Community i : community) {
 								System.out.println(i.AccountList());

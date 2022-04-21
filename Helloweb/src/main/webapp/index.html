@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>메인페이지 입니다.</title>
+</head>
+
+<body>
+	<h3>가나다라</h3>
+	<a href="info/myinfo.html">첫페이지</a>
+	<h3>내가 좋아하는 과일</h3>
+	<ul>
+		<li>사과</li>
+		<li>수박</li>
+	</ul>
+
+	<script>
+		var h3s = document.getElementsByTagName('h3');
+		h3s[0].innerText = 'Welcome to Minwook';
+		console.log(h3s[0]); /*h3 값 바꾸는 코드*/
+
+
+		var li = document.querySelector('ul>li'); /*ul의 자식인 li를 가져오겠다 + 이 조건을 만족하는 첫 번째 값을 가져온다?*/
+		li.style.background = 'yellow'; /*배경을 노란색으로 만드는 코드*/
+
+		var li2 = document.querySelector('ul>li:nth-child(1)');
+		li2.onclick = function(){
+			alert('리스트 태그를 클릭했습니다.'); /*이렇게 설정 후 노란색 배경 클릭 시 알람이 뜸*/
+			
+		}
+	</script>
+</body>
+
+</html>
