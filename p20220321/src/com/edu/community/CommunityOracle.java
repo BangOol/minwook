@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommunityOracle extends DAO implements CommunityService {
+public class CommunityOracle extends DAO implements CommunityService, CommunityServiceAdmin, CommunityAccountControl {
 	List<Community> community = new ArrayList<Community>();
 
 	@Override
@@ -184,11 +184,9 @@ public class CommunityOracle extends DAO implements CommunityService {
 
 			psmt.setString(1, com.getCommunityId());
 			r = psmt.executeUpdate();
-
 			if (r == 0) {
 				return 1;
 			} else {
-				System.out.println("중복되는 아이디가 존재합니다.");
 				return 0;
 			}
 
@@ -215,7 +213,6 @@ public class CommunityOracle extends DAO implements CommunityService {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				com = new Community();
 				com.setCommunityCount(rs.getInt("community_count"));
 				com.setCommunityName(rs.getString("community_name"));
 				community.add(com);
