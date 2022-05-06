@@ -5,14 +5,20 @@ public class MemberVO {
 	private String passwd;
 	private String email;
 	private String id;
+	private String profile;
+	
 	public String getName() {
 		return name;
 	}
 	
-	@Override
-	public String toString() {
-		return "MemberVO [name=" + name + ", passwd=" + passwd + ", email=" + email + ", id=" + id + "]";
+	public String getProfile() {
+		return profile;
 	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	
 	public void setName(String name) {
 		this.name = name;
@@ -36,4 +42,13 @@ public class MemberVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberVO [name=" + name + ", passwd=" + passwd + ", email=" + email + ", id=" + id + ", profile="
+				+ profile + "]";
+	}
+	
+	
+	
 }

@@ -25,14 +25,26 @@ public class FrontController extends HttpServlet{
 		list.put("/memberInsert.do",new MemberInsertControl());
 		list.put("/memberUpdate.do",new MemberUpdateControl());
 		list.put("/memberList.do", new MemberListControl());
+		list.put("/memberSearch.do", new MemberSearchControl());
+		list.put("/memberDelete.do", new MemberDeleteControl());
+		
+		
+		// JSON 관련등록
+		list.put("/memberListJson.do", new MemberListJson());
+		list.put("/memberInsertJson.do", new MemberInsertJson());
+		
+		
 	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding(charset);
+		
 		String url = req.getRequestURI(); // 사용자 URL -> /P20220503/memberInsert.do
-		String context = req.getContextPath();
+//		System.out.println(req.getRequestURI());// /P20220503
+		String context = req.getContextPath(); // /memberInser.do만 남기려고 사용하는 듯
+	
 		String path = url.substring(context.length()); //memberInsert.do를 의미
 		
 		Control exeCon = list.get(path); //키 입력 시 해당 값 반환

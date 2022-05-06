@@ -15,4 +15,17 @@ public class MemberService {
 	public List<MemberVO> memberList() {
 		return dao.memberList();
 	}
+	
+	public MemberVO memberSearch(String id) {
+		return dao.searchMember(id);
+	}
+	
+	public void updateMember(MemberVO vo) {
+		dao.updateMember(vo);
+	}
+
+	public void deleteMember(MemberVO vo) {
+		dao.deleteMember(vo);
+		
+	}
 }
