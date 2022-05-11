@@ -21,7 +21,7 @@ public class ListBookControl implements Controller {
 
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("result/listOutput.jsp").forward(request, response);
+		request.getRequestDispatcher("result/listOutput.tiles").forward(request, response);
 
 	}
 
